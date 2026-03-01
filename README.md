@@ -1,27 +1,21 @@
-# ECHO.11 — כלי לשיפור פרומפטים
+# ECHO.11 — Prompt Engine
+### כלי למחקר ושיפור פרומפטים מבוסס בינה מלאכותית
 
-כלי חינמי מבוסס מחקר לשיפור פרומפטים, בנוי על עקרונות מתוך:
-- **Google Prompt Engineering Whitepaper** (2025, 68 עמודים)
-- **Anthropic Claude Best Practices**
+ECHO.11 הוא כלי חינמי המבוסס על מתודולוגיות מתקדמות לשיפור האינטראקציה עם מודלי שפה (LLMs), בנוי על עקרונות מתוך:
+* **Google Prompt Engineering Whitepaper** (2025)
+* **Anthropic Claude Best Practices**
 
-## תכונות
-- ✅ 10 קריטריונים מבוססי מחקר לציון פרומפט
-- ✅ 3 רמות שיפור (2 חינמיות, 1 Pro)
-- ✅ תבניות מוכנות ב-6 קטגוריות
-- ✅ נגישות מלאה IS 5568 / WCAG 2.0 AA
-- ✅ RTL + עברית מלאה
-- ✅ מותאם למובייל
+---
 
+## תכונות עיקריות | Features
+* ✅ **מדד איכות:** 10 קריטריונים מבוססי מחקר לציון פרומפטים.
+* ✅ **שיפור רב-שלבי:** 3 רמות אופטימיזציה לתוצאות מקצועיות.
+* ✅ **ספריית תבניות:** פתרונות מוכנים ל-6 קטגוריות תוכן שונות.
+* ✅ **חווית משתמש:** תמיכה מלאה בעברית (RTL), נגישות WCAG 2.0 והתאמה למובייל.
 
-
-## רישיון
+## קרדיטים ורישיון | Credits & License
+* **Methodology:** Based on [Google PE Whitepaper](https://www.kaggle.com/whitepaper-prompt-engineering) and [Anthropic Docs](https://docs.anthropic.com).
+* **Fonts:** Rubik & Space Mono (Google Fonts).
+* **Trademarks:** ChatGPT (OpenAI), Claude (Anthropic), Gemini (Google).
 
 © 2026 Shira Sarid. כל הזכויות שמורות.
-
-## קרדיטים
-
-- מתודולוגיה: [Google PE Whitepaper](https://www.kaggle.com/whitepaper-prompt-engineering), [Anthropic Docs](https://docs.anthropic.com)
-- פונטים: Rubik, Space Mono (Google Fonts, Open Font License)
-- ChatGPT הוא סימן מסחרי של OpenAI
-- Claude הוא סימן מסחרי של Anthropic  
-- Gemini הוא סימן מסחרי של Google
