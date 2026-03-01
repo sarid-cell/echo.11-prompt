@@ -12,20 +12,7 @@
 - ✅ RTL + עברית מלאה
 - ✅ מותאם למובייל
 
-## התקנה מקומית
 
-```bash
-npm install
-npm run dev
-```
-
-## פריסה ל-Vercel
-
-1. העלה את הפרויקט ל-GitHub
-2. היכנס ל-[vercel.com](https://vercel.com) עם חשבון GitHub
-3. לחץ "New Project" → בחר את ה-repo
-4. Vercel יזהה אוטומטית שזה Vite — לחץ Deploy
-5. האתר חי!
 
 ## רישיון
 
