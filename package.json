@@ -3,7 +3,27 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "ECHO.11 — Research-Based Prompt Optimizer",
+  "description": "ECHO.11 — Research-Based Prompt Optimizer. Scores and improves AI prompts using 10 criteria from Google PE Whitepaper & Anthropic Best Practices.",
+  "author": {
+    "name": "Shira Sarid",
+    "url": "https://shirasarid.substack.com"
+  },
+  "homepage": "https://echo11.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR-USERNAME/echo11"
+  },
+  "keywords": [
+    "prompt-engineering",
+    "prompt-optimizer",
+    "ai-tools",
+    "react",
+    "vite",
+    "hebrew",
+    "rtl",
+    "wcag",
+    "accessibility"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,10 +31,14 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "@vercel/analytics": "^1.4.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

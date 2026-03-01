@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 /*
   ECHO.11 v7 — Research-Based Prompt Optimizer
@@ -765,6 +766,7 @@ export default function Echo11App() {
   return (
     <>
       {!entered ? <Splash onEnter={() => setEntered(true)} /> : <Tool />}
+      <Analytics />
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
