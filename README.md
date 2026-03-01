@@ -6,7 +6,7 @@ ECHO.11 הוא כלי חינמי המבוסס על מתודולוגיות מתק
 * **Anthropic Claude Best Practices**
 
 ---
-## 🔗 [לחצו כאן לשימוש בכלי החי באוויר] https://echo11-prompt.netlify.app/
+## 🔗 [לחצו כאן לשימוש בכלי החי באוויר](https://echo11-prompt.netlify.app)
 
 
 ## תכונות עיקריות | Features
