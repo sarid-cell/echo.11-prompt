@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 
 /*
   ECHO.11 v7 — Research-Based Prompt Optimizer
@@ -447,8 +447,8 @@ function Tool() {
   const [streak, setStreak] = useState(0);
   const [currentTier, setCurrentTier] = useState(0);
 
-  const origA = analyzePrompt(input);
-  const optA = analyzePrompt(output);
+  const origA = useMemo(() => analyzePrompt(input), [input]);
+  const optA = useMemo(() => analyzePrompt(output), [output]);
   const { d: typed, done } = useTypewriter(phase === "done" ? output : "");
   const toggle = (arr, setFn, id) => setFn(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
 
@@ -659,30 +659,24 @@ function Tool() {
               )}
             </button>
 
-            {showNudge && (
-              <div style={{ fontSize: "0.72em", color: "#c2410c", textAlign: "center", marginTop: 6, animation: "fadeIn 0.5s ease" }} role="status">
-                הפרומפט מחכה לשיפור — לחצ/י אופטימיזציה
-              </div>
-            )}
+            <div style={{ fontSize: "0.72em", color: "#c2410c", textAlign: "center", marginTop: 6, height: 20, opacity: showNudge ? 1 : 0, transition: "opacity 0.3s ease" }} role="status" aria-hidden={!showNudge}>
+              הפרומפט מחכה לשיפור — לחצ/י אופטימיזציה
+            </div>
           </div>
 
           {/* ═══ OUTPUT ═══ */}
-          <div style={{ ...S.card, display: "flex", flexDirection: "column", background: phase === "done" ? "#fff" : "#FAFAF8", transition: "all 0.3s" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+          <div style={{ ...S.card, display: "flex", flexDirection: "column", minHeight: 380, background: phase === "done" ? "#fff" : "#FAFAF8", transition: "background 0.3s" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6, minHeight: 38 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                 <span style={{ fontWeight: 700, fontSize: "0.88em" }}>פרומפט מועצם</span>
-                {phase === "done" && currentTier > 0 && (
-                  <span style={{ fontSize: "0.6em", fontWeight: 700, color: currentTier === 1 ? "#15803d" : "#4338ca", background: currentTier === 1 ? "#15803d14" : "#4338ca14", padding: "2px 8px", borderRadius: 10 }}>
-                    Tier {currentTier} · {TIER_LABELS_HE[currentTier]}
-                  </span>
-                )}
+                <span style={{ fontSize: "0.6em", fontWeight: 700, color: currentTier === 1 ? "#15803d" : "#4338ca", background: currentTier === 1 ? "#15803d14" : "#4338ca14", padding: "2px 8px", borderRadius: 10, opacity: phase === "done" && currentTier > 0 ? 1 : 0, transition: "opacity 0.3s" }}>
+                  Tier {currentTier || 1} · {TIER_LABELS_HE[currentTier || 1]}
+                </span>
               </div>
-              {phase === "done" && (
-                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <Ring score={optA.score} size={36} stroke={3} />
-                  <span style={{ fontSize: "0.7em", color: COLORS[optA.score], fontWeight: 600 }}>{LABELS[optA.score]}</span>
-                </div>
-              )}
+              <div style={{ display: "flex", alignItems: "center", gap: 6, opacity: phase === "done" ? 1 : 0, transition: "opacity 0.3s" }}>
+                <Ring score={phase === "done" ? optA.score : 0} size={36} stroke={3} />
+                <span style={{ fontSize: "0.7em", color: COLORS[optA.score], fontWeight: 600 }}>{phase === "done" ? LABELS[optA.score] : ""}</span>
+              </div>
             </div>
 
             {phase === "analyzing" && (
@@ -710,15 +704,15 @@ function Tool() {
                   role="region" aria-label="תוצאת פרומפט מועצם" aria-live="polite">
                   {typed}{!done && <span style={{ animation: "blink 0.8s infinite", color: "#c2410c" }} aria-hidden="true">|</span>}
                 </div>
-                {done && (
-                  <>
+                {/* Bottom section: always rendered to reserve space, fades in when typewriter completes */}
+                <div style={{ opacity: done ? 1 : 0, transition: "opacity 0.35s ease", pointerEvents: done ? "auto" : "none" }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, margin: "10px 0 4px", padding: "8px 0", borderTop: "1px solid #e5e5e3" }} role="status">
                       <Ring score={origA.score} size={32} stroke={3} />
                       <span style={{ color: "#15803d", fontWeight: 800 }} aria-hidden="true">→</span>
                       <Ring score={optA.score} size={32} stroke={3} />
                       <span style={{ fontSize: "0.8em", color: "#15803d", fontWeight: 700 }}>+{Math.max(0, optA.score - origA.score)} נקודות</span>
                     </div>
-                    {cheer && <div style={{ textAlign: "center", fontSize: "0.78em", color: "#c2410c", fontWeight: 600, marginBottom: 6, animation: "fadeIn 0.5s ease" }} role="status">{cheer}</div>}
+                    <div style={{ textAlign: "center", fontSize: "0.78em", color: "#c2410c", fontWeight: 600, marginBottom: 6, minHeight: 22 }} role="status">{cheer || "\u00A0"}</div>
 
                     <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
                       <button onClick={handleCopy} aria-label={copied ? "הועתק!" : "העתק פרומפט מועצם"} style={{ flex: 1, padding: "9px", border: "none", borderRadius: 9, fontWeight: 700, fontSize: "0.82em", fontFamily: "inherit", cursor: "pointer", background: copied ? "#15803d" : "#1a1a1a", color: "#fff", transition: "all 0.3s", minWidth: 70 }}>{copied ? "✓ הועתק!" : "העתק"}</button>
@@ -739,18 +733,15 @@ function Tool() {
                         ))}
                       </div>
                     </div>
-                  </>
-                )}
+                </div>
               </>
             )}
           </div>
         </div>
 
-        {history.length > 0 && (
-          <div style={{ textAlign: "center", marginTop: 12, fontSize: "0.72em", color: "#636363" }} role="status">
-            שיפרת {history.length} {history.length === 1 ? "פרומפט" : "פרומפטים"} בסשן הזה
-          </div>
-        )}
+        <div style={{ textAlign: "center", marginTop: 12, fontSize: "0.72em", color: "#636363", height: 20, opacity: history.length > 0 ? 1 : 0, transition: "opacity 0.3s" }} role="status">
+          {history.length > 0 ? `שיפרת ${history.length} ${history.length === 1 ? "פרומפט" : "פרומפטים"} בסשן הזה` : "\u00A0"}
+        </div>
       </main>
 
       <footer role="contentinfo" style={{ textAlign: "center", padding: "16px", borderTop: "1px solid #d4d4d8", fontSize: "0.7em", color: "#636363" }}>
